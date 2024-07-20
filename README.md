@@ -41,3 +41,10 @@ public static class ServiceExtensions
 }
 
 ```
+ConfigurePersistenceApp: Método de extensão que configura os serviços necessários para a persistência de dados.
+
+GetConnectionString("PostgreSQL"): Obtém a string de conexão do arquivo de configuração.
+
+AddDbContext<AppDbContext>: Configura o contexto do banco de dados para usar o PostgreSQL com a string de conexão fornecida.
+
+AddScoped<IUnitOfWork, UnitOfWork> e AddScoped<IUserRepository, UserRepository>: Adiciona as injeções de dependência para UnitOfWork e UserRepository.
