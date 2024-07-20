@@ -21,3 +21,23 @@ No arquivo `appsettings.json`, adicionamos a string de conexão para o PostgreSQ
   },
   "AllowedHosts": "*"
 }
+```
+### 2. Classe de Extensão de Serviço (ServiceExtensions.cs)
+
+No arquivo ServiceExtensions.cs, configuramos o serviço para utilizar o banco de dados PostgreSQL.
+
+```csharp
+public static class ServiceExtensions
+{
+    public static void ConfigurePersistenceApp(this IServiceCollection services,
+                                                IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("PostgreSQL");
+        services.AddDbContext<AppDbContext>(opt => opt.UseNpgsql(connectionString));
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IUserRepository, UserRepository>();
+    }
+}
+
+```
